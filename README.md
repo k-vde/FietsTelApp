@@ -16,6 +16,8 @@ Bij de start van het programma krijgt u een aantal pop up schermen waarin u gevr
 
 ###andere video
 
+##toekomstige 
+
 ##Contributie
 Alle hulp is welkom. De huidige code base kan waarschijnlijk veel beter/duidelijker. aanvragen voor functionaliteit of bug reports zijn ook zeer welkom.
 
