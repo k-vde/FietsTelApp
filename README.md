@@ -36,9 +36,12 @@ Pas de instellingen aan:
   * resolution: 360p
   * Shutter sound: Disabled
   * Backgroud capture: Fully enabled
-  * Scheduled: ingesteld op de juiste datum. Je neemt best wat marge voor en na want soms start de Lapsit de ingeplande opname te laat.
+  * Scheduled: ingesteld op de juiste datum. Je neemt best wat marge voor en na want soms start de Lapsit de ingeplande opname te laat. Daarna plaats je Lapse It best op de home screen.
+  ![lapse It home screen](/Readme images/lapse It home screen.png)
+  Format: ![Alt Text](url)
 #### creër een video van de opname.
 * vink Timestamp aan
+
 * zet de frame rate op 10 (frame rate lager dan 10 geeft problemen bij het afspelen met VLC.)
 * vink render as draft aan
 
