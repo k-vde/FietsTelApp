@@ -45,11 +45,12 @@ Pas de instellingen aan:
  
 #### creër een video van de opname.
 * vink Timestamp aan
-
 * zet de frame rate op 10 (frame rate lager dan 10 geeft problemen bij het afspelen met VLC.)
 * vink render as draft aan
+* geef een duidelijke titel in
 
-
+<a href="url"><img src="https://github.com/k-vde/FietsTelApp/blob/master/images/lapseItvoorbeeldinstellingenaanmakenvideo1.png" align="inline" height="350"></a>
+<a href="url"><img src="https://github.com/k-vde/FietsTelApp/blob/master/images/lapseItvoorbeeldinstellingenaanmakenvideo2.png" align="inline" height="350"></a>
 
 
 ## toekomstige functionaliteiten
