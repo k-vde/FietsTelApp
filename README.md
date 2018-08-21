@@ -12,14 +12,14 @@ Bij de start van het programma krijgt u een aantal pop up schermen waarin u gevr
 
 ### invoer gegevens
 Bij de start van het programma worden volgende gegevens gevraagd:
-1.adres van het telpunt
-1.Coordinaten van de locatie.
+1. adres van het telpunt
+1. Coordinaten van de locatie.
   1. Open Google Maps op uw computer. 
   1. Klik met de rechtermuisknop op de locatie of het gebied op de kaart.
   1. Selecteer Wat is hier?.
   1. Onderaan ziet u een kaart met de coördinaten.
-1.tijdstip waarop de video start.
-1.rate: is deze video versnelt opgenomen? (zie hoofdstuk Video met Lapseit)
+1. tijdstip waarop de video start.
+1. rate: is deze video versnelt opgenomen? (in het hoofdstuk Video met Lapse It wordt een frame interval van 1 seconde en een frame rate van 10 frames per seconde gebruikt dus de rate is dan 10)
 
 ### export data
 Alle data wordt geexporteerd naar een CSV bestand dat rechtstreeks geupload kan worden naar http://www.dataplatformfiets.be/.
@@ -28,7 +28,7 @@ De CSV bestanden worden geexporteerd naar de folder waarin het programma zich be
 ### creëren van beelden
 Videobeelden kunnen aangemaakt worden met eender welk middel. 
 Hieronder wordt een methode met Lapseit (http://www.lapseit.com/) beschreven. Op die manier kan je met een smartphone gedurende 2+ uur filmen. 
-#### Video met Lapseit
+#### Video met Lapse It
 ##### instellingen
 Pas de instellingen aan:
   * Frame interval: 1 seconds
