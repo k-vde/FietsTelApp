@@ -37,6 +37,7 @@ Pas de instellingen aan:
   * Shutter sound: Disabled
   * Backgroud capture: Fully enabled
   * Scheduled: ingesteld op de juiste datum. Je neemt best wat marge voor en na want soms start de Lapsit de ingeplande opname te laat. Daarna plaats je Lapse It best op de home screen. 
+  
 <a href="url"><img src="https://github.com/k-vde/FietsTelApp/blob/master/images/lapseItvoorbeeldinstellingen.png" align="inline" height="400"></a>
  <a href="url"><img src="https://github.com/k-vde/FietsTelApp/blob/master/images/lapseItvoorbeeldinstellingenschedule1.png" align="inline" height="400"></a>
  <a href="url"><img src="https://github.com/k-vde/FietsTelApp/blob/master/images/lapseItvoorbeeldinstellingenschedule2.png" align="inline" height="400"></a>
