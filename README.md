@@ -54,11 +54,11 @@ Pas de instellingen aan:
 
 
 ## toekomstige functionaliteiten
-voorlopig staan volgende extra features op het verlanglijstje.
-*rechtstreekse upload naar dataplatformfiets.be
-*onthouden van gebruikte adressen
-*uitbreiden met functionaliteit voor het tellen van voetgangers, personenwagens en vrachtwagens
-*verbetering interface
+voorlopig staan volgende extra features op het verlanglijstje:
+* rechtstreekse upload naar dataplatformfiets.be
+* onthouden van gebruikte adressen
+* uitbreiden met functionaliteit voor het tellen van voetgangers, personenwagens en vrachtwagens
+* verbetering interface
 
 ## Contributie
 Alle hulp is welkom. De huidige code base kan waarschijnlijk veel beter/duidelijker. 
