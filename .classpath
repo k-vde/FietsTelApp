@@ -2,5 +2,13 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/commons-codec-1.10.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="lib/httpclient-4.5.6.jar"/>
+	<classpathentry kind="lib" path="lib/httpcore-4.4.10.jar"/>
+	<classpathentry kind="lib" path="lib/httpmime-4.3.jar"/>
+	<classpathentry kind="lib" path="lib/jna-3.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/jna-3.3.0-platform.jar"/>
+	<classpathentry kind="lib" path="lib/vlcj-2.3.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

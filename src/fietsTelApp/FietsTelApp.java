@@ -3,7 +3,6 @@ package fietsTelApp;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.ActionMap;
-import javax.swing.Icon;
 import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -19,13 +18,8 @@ import javax.swing.KeyStroke;
 
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.beans.PropertyChangeListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -39,17 +33,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Insets;
-import java.awt.Component;
 import java.awt.Dimension;
 
-import uk.co.caprica.vlcj.binding.LibVlc;
 import uk.co.caprica.vlcj.runtime.RuntimeUtil;
 import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
 import uk.co.caprica.vlcj.player.MediaPlayer;
@@ -68,7 +56,8 @@ import org.apache.http.impl.client.*;
 
 
 
-public class TelApp extends JFrame {
+@SuppressWarnings("serial")
+public class FietsTelApp extends JFrame {
 	
 	
 
@@ -85,10 +74,10 @@ public class TelApp extends JFrame {
          int camionlr =0;
          int camionrl =0;
     int rateMultiplier = 10;
-    private ArrayList <Tel> voetgangers;
+    //private ArrayList <Tel> voetgangers;
     private ArrayList <Tel> fietsers;
-    private ArrayList <Tel> autos;
-    private ArrayList <Tel> camions;
+    //private ArrayList <Tel> autos;
+    //private ArrayList <Tel> camions;
     JFileChooser fc;
     float rate;
     
@@ -108,9 +97,7 @@ public class TelApp extends JFrame {
 	 SimpleDateFormat weekday;
 	 Date date;
 	 
-	 
 
-         
     // dit stukje haalt de VLC library op
     public static void main(String[] args) {
         NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), NATIVE_LIBRARY_SEARCH_PATH);
@@ -118,7 +105,7 @@ public class TelApp extends JFrame {
             @Override
             public void run() {
 					try {
-						new TelApp();
+						new FietsTelApp();
 					} catch (ParseException e) {
 						// TODO auto-generated catch block
 						e.printStackTrace();
@@ -127,10 +114,9 @@ public class TelApp extends JFrame {
         });
         //System.out.println(LibVlc.INSTANCE.libvlc_get_version());
     }
-    @SuppressWarnings("serial")
-	public TelApp() throws ParseException {
-    	
-    	
+    
+	public FietsTelApp() throws ParseException {
+    		
     	 
     	//datum en uur formatering:
     	someDate = "2018-08-01 07:00:00";
@@ -145,10 +131,10 @@ public class TelApp extends JFrame {
     	// einde datum en uur formatering
     	 
     	//Arraylists voor de gegevens    	 
-    	 voetgangers  = new ArrayList<Tel>();
+    	// voetgangers  = new ArrayList<Tel>();
     	 fietsers = new ArrayList<Tel>();
-    	 autos = new ArrayList<Tel>();
-    	 autos = new ArrayList<Tel>();
+    	// autos = new ArrayList<Tel>();
+    	// camions = new ArrayList<Tel>();
     	 
     	 //vals adres indien er iets misloopt met het invullen van het adres
     	 straat ="valsestraat";
