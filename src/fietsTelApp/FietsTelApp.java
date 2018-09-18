@@ -13,6 +13,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 
 
@@ -27,6 +28,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
@@ -93,6 +95,7 @@ public class FietsTelApp extends JFrame {
     String someDate;
 	 SimpleDateFormat sdf;
 	 SimpleDateFormat sdf2;
+	 SimpleDateFormat sdf3;
 	 SimpleDateFormat stf;
 	 SimpleDateFormat weekday;
 	 Date date;
@@ -122,12 +125,13 @@ public class FietsTelApp extends JFrame {
     	someDate = "2018-08-01 07:00:00";
     	sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     	sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+    	sdf3 = new SimpleDateFormat("yyyyMMddHHmmss");
     	stf = new SimpleDateFormat("HH:mm:ss");
     	weekday = new SimpleDateFormat("F");
     	date = sdf.parse(someDate);
-    	 System.out.println(date.getTime());
-    	 System.out.println(sdf.format(date));
-    	 System.out.println(weekday.format(date));
+    	 //System.out.println(date.getTime());
+    	 //System.out.println(sdf.format(date));
+    	 //System.out.println(weekday.format(date));
     	// einde datum en uur formatering
     	 
     	//Arraylists voor de gegevens    	 
@@ -263,6 +267,13 @@ public class FietsTelApp extends JFrame {
             textPane.add(scrollPane);
             kladTekst.setMargin(new Insets(5,5,5,5));
             kladTekst.setEditable(false);
+            kladTekst.append("U kan gebruik maken van sneltoetsen:"+ "\n");
+            kladTekst.append("- spatiebalk zet de video op pauze of play"+ "\n");
+            kladTekst.append("- de pijltjes links en recht laten de video voorruit of achteruit springen"+ "\n");
+            kladTekst.append("- de pijltjes naar boven en onder versnellen/vertragen de video"+ "\n");
+            kladTekst.append("- getal 7 telt een fietser van links naar rechts"+ "\n");
+            kladTekst.append("- getal 8 telt een fietser van rechts naar links"+ "\n");
+            
             rightPane.add(textPane, BorderLayout.CENTER);
             
             
@@ -294,7 +305,7 @@ public class FietsTelApp extends JFrame {
             Action slowdownAction = new AbstractAction() {
                 public void actionPerformed(ActionEvent e) {
                 	float rate =  mediaPlayerComponent.getMediaPlayer().getRate();
-                	System.out.println(rate);
+                	//System.out.println(rate);
                 	//rate= (float) (rate * 0.5);
                 	if (rate == 16 || rate == 8 || rate ==2) {
                 	rate = (float) (rate*0.5);
@@ -311,7 +322,7 @@ public class FietsTelApp extends JFrame {
                 	}else if ( rate == 0.25 ){
                 		rate = (float) 0.1;
                 	}
-                	System.out.println(rate);
+                	//System.out.println(rate);
                 	mediaPlayerComponent.getMediaPlayer().setRate(rate);
                 	rateLabel.setText(rate*rateMultiplier+ "X");
                 	
@@ -321,7 +332,7 @@ public class FietsTelApp extends JFrame {
             Action speedupAction = new AbstractAction() {
                 public void actionPerformed(ActionEvent e) {
                 	
-                	System.out.println(rate);
+                	//System.out.println(rate);
                 	//rate= (float) (rate * 2);
                 	if (rate == 8 || rate ==4 ||  rate == 1) {
                 	rate = (float) (rate*2);
@@ -338,7 +349,7 @@ public class FietsTelApp extends JFrame {
                 		rate = (float) 0.25;
                 	}
                 	
-                	System.out.println(rate);
+                	//System.out.println(rate);
                 	mediaPlayerComponent.getMediaPlayer().setRate(rate);
                 	rateLabel.setText(rate*rateMultiplier+ "X");
                 }
@@ -346,46 +357,36 @@ public class FietsTelApp extends JFrame {
             
             Action fietslrAction = new AbstractAction() {
                 public void actionPerformed(ActionEvent e) {
-                     	fietslr ++;
-                     	//System.out.println("tel fiets lr");
-                     	//System.out.println("Locatie-id	adres	lat	lon			richting	methode	kwaliteit	periode-van	periode-tot	weekdag	tijd-van	tijd-tot	per	fiets			fiets-heen	fiets-terug\r\n" + "");
-                     	//System.out.println("Locatie-id	adres	lat*	lon*	richting	visueel	80			periode-van	periode-tot	weekdag	tijd-van	tijd-tot	0	totaal aantal 	fiets-heen	fiets-terug\r\n" + "");
-                     	long videotime = mediaPlayerComponent.getMediaPlayer().getTime()*rateMultiplier;				
-                 		long time = date.getTime() + videotime;
-                     	//System.out.println(time);
-                     	//System.out.println(sdf.format(time));
-                 		Tel tel = new Tel (time, "heen", "fiets");
-                     	kladTekst.append("fiets lr " + sdf2.format(time)+";"+ weekday.format(time) +";" + stf.format(time) + "\n");
-                     	fietsers.add(tel);
-                     	fietslrCountText.setText("" + fietslr);
+                    fietslr ++;
+                    long videotime = mediaPlayerComponent.getMediaPlayer().getTime()*rateMultiplier;				
+                 	long time = date.getTime() + videotime;
+                    Tel tel = new Tel (time, "heen", "fiets");
+                    kladTekst.append("fiets van links naar rechts " + sdf2.format(time) +" " + stf.format(time) + "\n");
+                    fietsers.add(tel);
+                    fietslrCountText.setText("" + fietslr);
                 }
             };
             Action fietsrlAction = new AbstractAction() {
                 public void actionPerformed(ActionEvent e) {
                 	fietsrl ++;
-                 	//System.out.println("tel fiets rl");
-                 	//System.out.println("Locatie-id	adres	lat	lon			richting	methode	kwaliteit	periode-van	periode-tot	weekdag	tijd-van	tijd-tot	per	fiets			fiets-heen	fiets-terug\r\n" + "");
-                 	//System.out.println("Locatie-id	adres	lat*	lon*	richting	visueel	80			periode-van	periode-tot	weekdag	tijd-van	tijd-tot	0	totaal aantal 	fiets-heen	fiets-terug\r\n" + "");
-                 	long videotime = mediaPlayerComponent.getMediaPlayer().getTime()*rateMultiplier;				
-             		long time = date.getTime() + videotime;
-                 	//System.out.println(time);
-                 	//System.out.println(sdf.format(time));
-             		Tel tel = new Tel (time, "terug", "fiets");
-                 	kladTekst.append("fiets rl " + sdf2.format(time)+";"+ weekday.format(time) +";" + stf.format(time) + "\n");
-                 	String arraystring =  sdf2.format(time)+";"+sdf2.format(time)+";"+ weekday.format(time) +";" + stf.format(time) +";" + stf.format(time) +";" + "0" +";" + "1"+";" +  "0" +";" + "1"  ;
-                 	System.out.println(arraystring);
-                 	fietsers.add(tel);
-                 	fietsrlCountText.setText("" + fietsrl);
+ 	             	long videotime = mediaPlayerComponent.getMediaPlayer().getTime()*rateMultiplier;				
+ 	             	long time = date.getTime() + videotime;
+ 	             	Tel tel = new Tel (time, "terug", "fiets");
+ 	             	kladTekst.append("fiets van rechts naar links " + sdf2.format(time) +" " + stf.format(time) + "\n");
+ 					fietsers.add(tel);
+ 					fietsrlCountText.setText("" + fietsrl);
                 }
             };
             
             Action exportCsvAction = new AbstractAction() {
                 public void actionPerformed(ActionEvent e) {
                 	try {
-                        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
-                        new FileOutputStream(adres + someDate +".csv"), "UTF-8"));
-                        //adres+ " " + someDate +"
-                        bw.write("Locatie-id;adres;latitude;longitude;richting;methode;kwaliteit;periode-van;periode-tot;weekdag;tijd-van;tijd-tot;per fiets;fiets-heen;fiets-terug");//csv header
+                		String tijd = sdf3.format(date);
+                		String bestandsnaam = adres  + " "+ tijd + ".csv";
+                		OutputStream os = new FileOutputStream(bestandsnaam);
+                		            		
+                		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os,"UTF-8") );
+                        bw.write("Locatie-id;adres;latitude;longitude;richting;methode;kwaliteit;periode-van;periode-tot;weekdag;tijd-van;tijd-tot;per;fiets;fiets-heen;fiets-terug");//csv header
                         bw.newLine();
                         for (Tel object: fietsers) {                            
                             bw.write(object.getCsvLine());
@@ -393,6 +394,7 @@ public class FietsTelApp extends JFrame {
                         }
                         bw.flush();
                         bw.close();
+                        JOptionPane.showMessageDialog(null,"bestand" + bestandsnaam + "is weggeschreven naar de folder waar het programma zich bevindt");
                     } catch (UnsupportedEncodingException e1) {
                     } catch (FileNotFoundException e1) {
                     } catch (IOException e1) {
@@ -433,7 +435,7 @@ public class FietsTelApp extends JFrame {
             ActionMap am = contentPane.getActionMap();
             im.put(KeyStroke.getKeyStroke("NUMPAD7"),"7");
             am.put("7", fietslrAction);
-            im.put(KeyStroke.getKeyStroke("NUMPAD_8"),"8");
+            im.put(KeyStroke.getKeyStroke("NUMPAD8"),"8");
             am.put("8", fietsrlAction);
             
   //videobindings
@@ -441,12 +443,10 @@ public class FietsTelApp extends JFrame {
             am.put("right", skipAction);
             im.put(KeyStroke.getKeyStroke("LEFT"),"left");
             am.put("left", rewindAction);
-            im.put(KeyStroke.getKeyStroke("LEFT"),"left");
-            am.put("left", rewindAction);
-            im.put(KeyStroke.getKeyStroke("PLUS"),"plus");
-            am.put("plus", speedupAction);
-            im.put(KeyStroke.getKeyStroke("MINUS"),"minus");
-            am.put("minus", slowdownAction);
+            im.put(KeyStroke.getKeyStroke("UP"),"up");
+            am.put("up", speedupAction);
+            im.put(KeyStroke.getKeyStroke("DOWN"),"down");
+            am.put("down", slowdownAction);
             im.put(KeyStroke.getKeyStroke("SPACE"),"space");
             am.put("space", pauseAction);
             
@@ -494,26 +494,22 @@ public class FietsTelApp extends JFrame {
 //einde mediaplayer events
             frame.setContentPane(contentPane);
             frame.setVisible(true);
-            
-//file open shermke tijdelijk vervangen door hard coded voor test
-                       
-            /*JOptionPane.showMessageDialog(null,"selecteer een videobestand");
+               
+            JOptionPane.showMessageDialog(null,"selecteer een videobestand");
             fc = new JFileChooser();
             int returnVal = fc.showOpenDialog(null);
             File file = null;
             
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 file = fc.getSelectedFile();
-                //This is where a real application would open the file.
+                kladTekst.append("Video geselecteerd: " + file.getPath() + "." + "\n");
                 
-                System.out.println("Opening: " + file.getPath() + "." + "\n");
             } else {
-            	 System.out.println("Open command cancelled by user." + "\n");
+            	kladTekst.append("Geen video geselecteerd." + "\n");
             }
-            */
             
-            //mediaPlayerComponent.getMediaPlayer().prepareMedia(file.getPath());
-            mediaPlayerComponent.getMediaPlayer().prepareMedia("file:///G:\\onedrive\\Fietsbeleid\\fietsbeleid Westerlo\\Tellingen\\fietstelweek\\geelse straat Westerlo.mp4");
+            mediaPlayerComponent.getMediaPlayer().prepareMedia(file.getPath());
+            //mediaPlayerComponent.getMediaPlayer().prepareMedia("file:///");
             //video afspelen, op pauze zetten en terugspoelen om niet te starten met een zwart scherm maar met de eerste frame. lelijk maar het werkt :)
             mediaPlayerComponent.getMediaPlayer().play();
             try {
@@ -526,6 +522,71 @@ public class FietsTelApp extends JFrame {
             mediaPlayerComponent.getMediaPlayer().pause();
             mediaPlayerComponent.getMediaPlayer().skip(-1000);
             //einde hack voor eerste frame juist te zetten
+            
+            
+            
+            JTextField straatField = new JTextField(15);
+            JTextField huisnummerField = new JTextField(15);
+            JTextField postcodeField = new JTextField(15);
+            JTextField gemeenteField = new JTextField(15);
+            JTextField lengtegraadField = new JTextField(15);
+            lengtegraadField.setText("50.640175");//geografisch centrum van België
+            JTextField breedtegraadField = new JTextField(15);
+            breedtegraadField.setText("4.666657");//geografisch centrum van België
+            JTextField rateField = new JTextField(15);
+            rateField.setText("1");
+            JTextField tijdField = new JTextField(15);
+            tijdField.setText("2018-08-01 07:00:00");
+
+            JPanel locatiePanel = new JPanel();
+            locatiePanel.setLayout(new GridLayout(8,2,10,10));
+            
+            locatiePanel.add(new JLabel("straatnaam:"));
+            locatiePanel.add(straatField);
+            locatiePanel.add(new JLabel("huisnummer:"));
+            locatiePanel.add(huisnummerField);
+            locatiePanel.add(new JLabel("postcode:"));
+            locatiePanel.add(postcodeField);
+            locatiePanel.add(new JLabel("gemeente:"));
+            locatiePanel.add(gemeenteField);
+            locatiePanel.add(new JLabel("afspeelsnelheid:"));
+            locatiePanel.add(rateField);
+            locatiePanel.add(new JLabel("breedtegraad:"));
+            locatiePanel.add(breedtegraadField);
+            locatiePanel.add(new JLabel("lengtegraad:"));
+            locatiePanel.add(lengtegraadField);
+            locatiePanel.add(new JLabel("starttijd video:"));
+            locatiePanel.add(tijdField);
+
+            
+            int result = JOptionPane.showConfirmDialog(null, locatiePanel, 
+                     "Geef een adres en de coordinaten op.", JOptionPane.OK_CANCEL_OPTION);
+            if (result == JOptionPane.OK_OPTION) {
+                
+                straat = straatField.getText();
+                huisnummer = huisnummerField.getText();
+                postcode = postcodeField.getText();
+                gemeente = gemeenteField.getText();
+                
+                adres = straat + " " + huisnummer + " "+ postcode +" " + gemeente;
+                
+                // hier moet nog een errordetectie komen voor de float.
+                latitude =  Float.parseFloat( breedtegraadField.getText());
+                longitude = Float.parseFloat(lengtegraadField.getText());
+                
+                someDate = tijdField.getText();
+                date = sdf.parse(someDate);
+                
+                kladTekst.append(adres + "\n");
+                kladTekst.append("breedtegraad: "+ latitude + " lengtegraad: " + longitude + "\n");
+                kladTekst.append ("afspeelsnelheid: " + rate + "\n");
+                kladTekst.append ("starttijd video: " + someDate + "\n");
+                
+ 
+            }
+            
+                        
+           
 
         }
      
@@ -539,39 +600,6 @@ public class FietsTelApp extends JFrame {
      }*/
      
 ////////////////////////////////////////
-private class KeyAction extends AbstractAction {
-
-		private String key;
-		public KeyAction(String key) {
-			this.key =key;
-			
-          }
-
-@Override
-		public void actionPerformed(ActionEvent e) {
-			switch (key) {
-            case "7":
-            	System.out.println("8");
-                break;
-            case "8":
-                System.out.println("8");
-                 break;
-            case "4":
-                System.out.println("4");
-                 break;
-            case "5":
-                System.out.println("5");
-                 break;
-            case "right":
-                System.out.println("right");
-                 break;
-            case "left":
-                System.out.println("left");
-                 break;
-			
-		}
-	}
-}
 
     public class Tel{
     	private long time;
@@ -592,7 +620,6 @@ private class KeyAction extends AbstractAction {
     	 } else {
     	    lijn = ";"+ adres +";"+ latitude + ";" + longitude +";"+";"+"visueel"+";"+"90"+";"+ sdf2.format(time)+";"+sdf2.format(time)+";"+ weekday.format(time) +";" + stf.format(time) +";" + stf.format(time) +";" + "0" +";" + "1"+";" +  "0" +";" + "1"  ;
     	 }
-    	System.out.println(lijn);
     	return lijn;
     	 
      }
@@ -643,19 +670,19 @@ public static String uploadFile()
 
           sb.append(statusCode+"\n");
           if(statusCode!=200){
-             System.out.println("statusCode =!=" +statusCode);           
+             //System.out.println("statusCode =!=" +statusCode);           
           }
           else System.out.println("OK"); 
 
            while ((line = br.readLine()) != null) {
               sb.append(line+"\n");
-            System.out.println("+"+line);
+            //System.out.println("+"+line);
           }
 
           httpclient.close();
           return sb.toString();
    }catch (IOException ioe) {
-   System.out.println(ioe);
+   //System.out.println(ioe);
    return "error"+ioe;
    } finally {
    httpclient.getConnectionManager().shutdown();
